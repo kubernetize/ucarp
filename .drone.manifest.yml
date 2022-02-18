@@ -1,0 +1,13 @@
+kind: pipeline
+name: manifest
+type: kubernetes
+
+steps:
+- image: plugins/manifest
+  pull: always
+  settings:
+    registry: registry.lan
+    insecure: true
+    auto_tag: true
+
+depends_on: []
