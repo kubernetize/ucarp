@@ -1,5 +1,8 @@
 FROM alpine:3.15
 
+LABEL org.opencontainers.image.authors "Richard Kojedzinszky <richard@kojedz.in>"
+LABEL org.opencontainers.image.source https://github.com/kubernetize/ucarp
+
 RUN \
    apk --no-cache add ucarp iproute2 libcap && \
    setcap cap_net_raw+ep /usr/sbin/ucarp && \

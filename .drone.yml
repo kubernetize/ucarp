@@ -14,11 +14,16 @@ steps:
   privileged: true
   pull: always
   settings:
+    auto_label: false
     auto_tag: true
     auto_tag_suffix: arm64
-    insecure: true
-    registry: registry.lan
-    repo: registry.lan/krichy/ucarp
+    mirror:
+      from_secret: hub_docker_mirror
+    password:
+      from_secret: ghcr.io.password
+    registry: ghcr.io
+    repo: ghcr.io/kubernetize/ucarp
+    username: rkojedzinszky
   volumes:
   - name: docker
     path: /var/lib/docker
@@ -42,11 +47,16 @@ steps:
   privileged: true
   pull: always
   settings:
+    auto_label: false
     auto_tag: true
     auto_tag_suffix: arm
-    insecure: true
-    registry: registry.lan
-    repo: registry.lan/krichy/ucarp
+    mirror:
+      from_secret: hub_docker_mirror
+    password:
+      from_secret: ghcr.io.password
+    registry: ghcr.io
+    repo: ghcr.io/kubernetize/ucarp
+    username: rkojedzinszky
   volumes:
   - name: docker
     path: /var/lib/docker
@@ -69,11 +79,16 @@ steps:
   privileged: true
   pull: always
   settings:
+    auto_label: false
     auto_tag: true
     auto_tag_suffix: amd64
-    insecure: true
-    registry: registry.lan
-    repo: registry.lan/krichy/ucarp
+    mirror:
+      from_secret: hub_docker_mirror
+    password:
+      from_secret: ghcr.io.password
+    registry: ghcr.io
+    repo: ghcr.io/kubernetize/ucarp
+    username: rkojedzinszky
   volumes:
   - name: docker
     path: /var/lib/docker
@@ -94,11 +109,12 @@ platform:
   variant: v8
 steps:
 - image: plugins/manifest
-  name: registry.lan/krichy/ucarp
+  name: ghcr.io/kubernetize/ucarp
   pull: always
   settings:
     auto_tag: true
-    insecure: true
-    registry: registry.lan
-    spec: manifests/registry.lan-krichy-ucarp.tmpl
+    password:
+      from_secret: ghcr.io.password
+    spec: manifests/ghcr.io-kubernetize-ucarp.tmpl
+    username: rkojedzinszky
 type: kubernetes
