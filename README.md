@@ -6,7 +6,7 @@ operation:
 Variable | Description | Default value
 -|-|-
 UCARP_ADDR | Virtual IP Address | -
-UCARP_INTERFACE | Interface to run ucarp on | __eth0__
+UCARP_INTERFACE | Interface to run ucarp on | guessed from routing table
 UCARP_SRCIP | Source IP address to use | guessed from $UCARP_INTERFACE
 UCARP_VHID | Virtual host ID | __1__
 UCARP_PASS | Password | __password__
