@@ -10,8 +10,9 @@ UCARP_INTERFACE | Interface to run ucarp on | guessed from routing table
 UCARP_SRCIP | Source IP address to use | guessed from $UCARP_INTERFACE
 UCARP_VHID | Virtual host ID | __1__
 UCARP_PASS | Password | __password__
+UCARP_PASS_FILE | File containing password | -
 
-At least `UCARP_ADDR` must be specified. Also, recommended to specify `UCARP_PASS`.
+At least `UCARP_ADDR` must be specified. Also, recommended to specify `UCARP_PASS`. Specifying `UCARP_PASS_FILE` will override `UCARP_PASS`.
 
 Capabilities `CAP_NET_RAW` and `CAP_NET_ADMIN` are needed for correct operation.
 

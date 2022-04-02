@@ -25,6 +25,15 @@ if [ -z "$UCARP_SRCIP" ]; then
 	echo "[+] Guessed source ip on $UCARP_INTERFACE: $UCARP_SRCIP"
 fi
 
+if [ -n "$UCARP_PASS_FILE" ]; then
+	echo "[=] Reading password from $UCARP_PASS_FILE"
+	if ! [ -r "$UCARP_PASS_FILE" ]; then
+		echo "[-] Reading password from $UCARP_PASS_FILE failed"
+		exit 4
+	fi
+	UCARP_PASS="$(cat "$UCARP_PASS_FILE")"
+fi
+
 exec /usr/sbin/ucarp \
 	--interface="$UCARP_INTERFACE" \
 	--srcip="$UCARP_SRCIP" \
