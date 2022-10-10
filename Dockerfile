@@ -1,12 +1,12 @@
-FROM alpine:3.15.6
+FROM alpine:3.16.2
 
 LABEL org.opencontainers.image.authors "Richard Kojedzinszky <richard@kojedz.in>"
 LABEL org.opencontainers.image.source https://github.com/kubernetize/ucarp
 
 RUN \
-   apk --no-cache add ucarp iproute2 libcap && \
+   apk --no-cache add ucarp libcap && \
    setcap cap_net_raw+ep /usr/sbin/ucarp && \
-   setcap cap_net_admin+ep /sbin/ip && \
+   setcap cap_net_admin+ep $(readlink /sbin/ip) && \
    apk --no-cache del libcap
 
 COPY assets/ /
