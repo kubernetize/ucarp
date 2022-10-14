@@ -34,13 +34,19 @@ if [ -n "$UCARP_PASS_FILE" ]; then
 	UCARP_PASS="$(cat "$UCARP_PASS_FILE")"
 fi
 
+UCARP_EXTRA=
+if [ -n "$UCARP_BROADCAST" ]; then
+	UCARP_EXTRA="--nomcast"
+fi
+
 exec /usr/sbin/ucarp \
 	--interface="$UCARP_INTERFACE" \
 	--srcip="$UCARP_SRCIP" \
 	--vhid="$UCARP_VHID" \
 	--pass="$UCARP_PASS" \
 	--addr="$UCARP_ADDR" \
-	--upscript=/etc/ucarp/vip-up-default.sh \
-	--downscript=/etc/ucarp/vip-down-default.sh \
+	--upscript=/etc/ucarp/vip-up \
+	--downscript=/etc/ucarp/vip-down \
 	--shutdown \
-	--xparam=32
+	--xparam="$UCARP_MASKLEN" \
+	$UCARP_EXTRA

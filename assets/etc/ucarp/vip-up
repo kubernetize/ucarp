@@ -1,0 +1,20 @@
+#!/bin/sh
+
+ip addr add "$2"/"$3" dev "$1"
+
+if [ -n "$UCARP_RTABLE" ]; then
+	ip rule add from "$2" lookup "${UCARP_RTABLE}"
+
+	route=$(ip route | grep "dev[[:space:]]$1[[:space:]].*scope[[:space:]]*link.*src.*[[:space:]]$2[[:space:]]*$")
+	if [ -z "$route" ]; then
+		echo "Failed to get original route"
+		exit 1
+	fi
+
+	ip route del $route
+	ip route add table "$UCARP_RTABLE" $route
+
+	if [ -n "$UCARP_GATEWAY" ]; then
+		ip route add table "$UCARP_RTABLE" default via "${UCARP_GATEWAY}"
+	fi
+fi

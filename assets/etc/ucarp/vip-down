@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ -n "$UCARP_RTABLE" ]; then
+	ip rule del from "$2" lookup "${UCARP_RTABLE}"
+fi
+
+ip addr del "$2"/"$3" dev "$1"
