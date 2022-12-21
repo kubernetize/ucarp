@@ -1,5 +1,9 @@
 #!/bin/sh
 
+: ${UCARP_VHID:=1}
+: ${UCARP_PASS:=password}
+: ${UCARP_MASKLEN:=32}
+
 if [ -z "$UCARP_ADDR" ]; then
 	echo "[-] UCARP_ADDR environment variable not set"
 	exit 1

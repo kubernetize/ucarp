@@ -11,8 +11,6 @@ RUN \
 
 COPY assets/ /
 
-ENV UCARP_VHID=1 UCARP_PASS=password UCARP_MASKLEN=32
-
 USER 65534
 
 CMD ["/usr/local/sbin/ucarp.sh"]
