@@ -2,6 +2,7 @@
 
 if [ -n "$UCARP_RTABLE" ]; then
 	ip rule del from "$2" lookup "${UCARP_RTABLE}"
+	ip route flush table "${UCARP_RTABLE}"
 fi
 
 ip addr del "$2"/"$3" dev "$1"

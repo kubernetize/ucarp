@@ -5,14 +5,10 @@ ip addr add "$2"/"$3" dev "$1"
 if [ -n "$UCARP_RTABLE" ]; then
 	ip rule add from "$2" lookup "${UCARP_RTABLE}" ${UCARP_RULE_PRIORITY+priority $UCARP_RULE_PRIORITY}
 
-	route=$(ip route | grep "dev[[:space:]]$1[[:space:]].*scope[[:space:]]*link.*src.*[[:space:]]$2[[:space:]]*$")
-	if [ -z "$route" ]; then
-		echo "Failed to get original route"
-		exit 1
-	fi
+	eval $(ipcalc -n "$2/$3")
 
-	ip route del $route
-	ip route add table "$UCARP_RTABLE" $route
+	ip route del "$NETWORK/$3" dev "$1" scope link src "$2"
+	ip route add table "$UCARP_RTABLE" "$NETWORK/$3" dev "$1" scope link src "$2"
 
 	if [ -n "$UCARP_GATEWAY" ]; then
 		ip route add table "$UCARP_RTABLE" default via "${UCARP_GATEWAY}"
