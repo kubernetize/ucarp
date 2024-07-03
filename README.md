@@ -13,6 +13,7 @@ UCARP_SRCIP | Source IP address to use | guessed from $UCARP_INTERFACE
 UCARP_VHID | Virtual host ID | __1__
 UCARP_PASS | Password | __password__
 UCARP_PASS_FILE | File containing password | -
+UCARP_GARP_TIMEOUT | Timeout during sending GARP packets after becoming master | -
 
 At least `UCARP_ADDR` must be specified. Also, recommended to specify `UCARP_PASS`. Specifying `UCARP_PASS_FILE` will override `UCARP_PASS`.
 

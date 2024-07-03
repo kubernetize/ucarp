@@ -42,6 +42,9 @@ UCARP_EXTRA=
 if [ -n "$UCARP_BROADCAST" ]; then
 	UCARP_EXTRA="--nomcast"
 fi
+if [ -n "$UCARP_GARP_TIMEOUT" ]; then
+	UCARP_EXTRA="$UCARP_EXTRA --garp-timeout=${UCARP_GARP_TIMEOUT}"
+fi
 
 exec /usr/sbin/ucarp \
 	--interface="$UCARP_INTERFACE" \
