@@ -32,7 +32,8 @@ The image can also be run in its on network namespace too, possibly with additio
 Variable | Description | Default value
 -|-|-
 UCARP_RTABLE | Routing table to create and to place routes into | -
+UCARP_RTABLE_NETWORK_LENGTH | Network length overriding __UCARP_MASKLEN__ in specific routing table | __UCARP_MASKLEN__
 UCARP_GATEWAY | Default gateway for traffic originating from Virtual IP | -
 UCARP_RULE_PRIORITY | Priority to use in lookup rule | -
 
-At least `UCARP_RTABLE` must be set to an integer to enable this operation. Usually `2` will do, but if you have multiple ucarp containers in a Kubernetes POD, you must specify different IDs for each. Also you will probably want to set `UCARP_MASKLEN` to real network netmask instead of the default __32__. Specify `UCARP_GATEWAY` to set up a default route in the selected routing table.
+At least `UCARP_RTABLE` must be set to an integer to enable this operation. Usually `2` will do, but if you have multiple ucarp containers in a Kubernetes POD, you must specify different IDs for each. Also you will probably want to set `UCARP_RTABLE_NETWORK_LENGTH` to real network netmask instead of the default __32__. Specify `UCARP_GATEWAY` to set up a default route in the selected routing table.

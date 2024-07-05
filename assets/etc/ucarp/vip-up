@@ -7,8 +7,14 @@ if [ -n "$UCARP_RTABLE" ]; then
 
 	eval $(ipcalc -n "$2/$3")
 
-	ip route del "$NETWORK/$3" dev "$1" scope link src "$2"
-	ip route add table "$UCARP_RTABLE" "$NETWORK/$3" dev "$1" scope link src "$2"
+	if [ $3 -lt 32 ]; then
+		ip route del "$NETWORK/$3" dev "$1" scope link src "$2"
+	fi
+
+	if [ ${UCARP_RTABLE_NETWORK_LENGTH} -lt 32 ]; then
+		eval $(ipcalc -n "$2/${UCARP_RTABLE_NETWORK_LENGTH}")
+		ip route add table "$UCARP_RTABLE" "$NETWORK/${UCARP_RTABLE_NETWORK_LENGTH}" dev "$1" scope link src "$2"
+	fi
 
 	if [ -n "$UCARP_GATEWAY" ]; then
 		ip route add table "$UCARP_RTABLE" default via "${UCARP_GATEWAY}"
